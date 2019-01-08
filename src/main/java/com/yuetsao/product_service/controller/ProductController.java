@@ -18,6 +18,9 @@ public class ProductController {
     @Value("${server.port}")
     private String port;
 
+    @Value("${env}")
+    private String env;
+
     @Autowired
     private ProductService productService;
 
@@ -36,7 +39,7 @@ public class ProductController {
         Product product = productService.findById(id);
         Product result = new Product();
         BeanUtils.copyProperties(product, result);
-        result.setName(product.getName()+"data from" + port);
+        result.setName(product.getName()+"data from" + port+ "env=" + env);
         return result;
     }
 }
